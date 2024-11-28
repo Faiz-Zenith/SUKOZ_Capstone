@@ -1,21 +1,72 @@
 package com.muhammadiyah.sukozapp.search
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadiyah.sukozapp.R
+import com.muhammadiyah.sukozapp.databinding.ActivitySearchBinding
+import com.muhammadiyah.sukozapp.home.HomeActivity
+import com.muhammadiyah.sukozapp.model.Recipe
+import com.muhammadiyah.sukozapp.search.adapter.RecipeAdapter
+import android.text.Editable
+import android.text.TextWatcher
 
 class SearchActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySearchBinding
+    private lateinit var recipeAdapter: RecipeAdapter
+    private var searchQuery: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_search)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        recipeAdapter = RecipeAdapter(emptyList())
+        binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
+        binding.rvSearchResults.adapter = recipeAdapter
+
+        binding.btnBack.setOnClickListener {
+            finish()
         }
+
+        binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.menu_bookmark -> {
+                    Toast.makeText(this, "Bookmark", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                searchQuery = s.toString()
+                if (searchQuery?.isNotEmpty() == true) {
+                    binding.tvSearchResult.text = "Result for '$searchQuery'"
+                    searchFood(searchQuery ?: "")
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun searchFood(query: String) {
+        val results = listOf(
+            Recipe("Nasi Goreng"),
+            Recipe("Sate Ayam"),
+            Recipe("Gado-Gado")
+        )
+
+        recipeAdapter.updateData(results)
     }
 }
