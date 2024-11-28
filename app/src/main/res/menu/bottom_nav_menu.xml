@@ -5,12 +5,11 @@
         android:icon="@drawable/ic_home"
         android:title="Home" />
 
-    <!-- Tambahkan Meal Plan jika dibutuhkan -->
     <item
         android:id="@+id/menu_meal_plan"
         android:icon="@drawable/ic_meal_plan"
         android:title="Meal Plan"
-        android:visible="false" /> <!-- Optional -->
+        android:visible="false" />
 
     <item
         android:id="@+id/menu_bookmark"

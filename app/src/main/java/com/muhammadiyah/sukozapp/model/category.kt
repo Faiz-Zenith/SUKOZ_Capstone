@@ -1,7 +1,7 @@
 package com.muhammadiyah.sukozapp.model
 
 data class Category(
-    val id: Int,
+    val id: String,
     val name: String
 )
 

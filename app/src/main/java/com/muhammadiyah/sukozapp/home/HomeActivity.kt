@@ -66,6 +66,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupCategories(categories: List<Category>) {
         binding.rvWhatToCook.layoutManager = LinearLayoutManager(this)
-        binding.rvWhatToCook.adapter = CategoryAdapter(categories)
+        binding.rvWhatToCook.adapter = CategoryAdapter(categories) { selectedCategories ->
+        }
     }
 }
