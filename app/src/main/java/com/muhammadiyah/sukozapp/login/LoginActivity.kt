@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.muhammadiyah.sukozapp.MainActivity
 import com.muhammadiyah.sukozapp.databinding.ActivityLoginBinding
+import com.muhammadiyah.sukozapp.home.HomeActivity
+import com.muhammadiyah.sukozapp.register.SignupActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -34,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToHomePage() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
