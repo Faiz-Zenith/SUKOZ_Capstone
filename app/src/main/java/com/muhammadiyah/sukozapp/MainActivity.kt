@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var categoryAdapter: CategoryAdapter
     private val categories = listOf(
-        Category("Category 1"),
-        Category("Category 2"),
-        Category("Category 3"),
-        Category("Category 4"),
-        Category("Category 5")
+        Category("Masakan suda"),
+        Category("Masakan Jawa"),
+        Category("Masakan Tegal"),
+        Category("Masakan Malang"),
+        Category("Masakan Bandung")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
