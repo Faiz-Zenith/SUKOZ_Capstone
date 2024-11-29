@@ -32,6 +32,11 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.ivSearchIcon.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_home -> {

@@ -27,8 +27,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnTakeMeToHome.visibility = View.GONE
+
         categoryAdapter = CategoryAdapter(categories) { selectedCategories ->
-            binding.btnTakeMeToHome.visibility = if (selectedCategories.isNotEmpty()) View.VISIBLE else View.GONE
+            binding.btnTakeMeToHome.visibility =
+                if (selectedCategories.isNotEmpty()) View.VISIBLE else View.GONE
         }
 
         binding.recyclerViewCategories.layoutManager = LinearLayoutManager(this)

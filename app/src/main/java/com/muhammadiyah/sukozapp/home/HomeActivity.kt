@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
         val username = intent.getStringExtra("username") ?: "User"
         binding.tvHelloUser.text = "Hello, $username"
 
-        binding.etSearch.setOnClickListener {
+        binding.ivSearchIcon.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
