@@ -5,4 +5,6 @@
     <color name="purple_700">#6200EE</color>
     <color name="category_selected">#FF6200EE</color>
     <color name="category_default">#3700B3</color>
+    <color name="light_blue">#03A9F4</color>
+    <color name="dark_blue">#0048FF</color>
 </resources>
