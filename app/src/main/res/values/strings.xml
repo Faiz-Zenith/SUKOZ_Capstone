@@ -56,4 +56,6 @@
     <string name="ic_user" />
     <string name="back" />
     <string name="search_icon" />
+    <string name="bookmark" />
+    <string name="recipe_image" />
 </resources>

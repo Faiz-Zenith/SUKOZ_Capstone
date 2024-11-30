@@ -2,4 +2,16 @@
 <resources>
     <item name="tvHelloUser" type="id" />
     <item name="ivProfile" type="id" />
+    <item name="ivBack" type="id" />
+    <item name="ivBookmark" type="id" />
+    <item name="tvCategory" type="id" />
+    <item name="ivRecipeImage" type="id" />
+    <item name="tvCalories" type="id" />
+    <item name="tvProtein" type="id" />
+    <item name="tvSodium" type="id" />
+    <item name="tvIngredients" type="id" />
+    <item name="tvIngredientsList" type="id" />
+    <item name="tvInstructions" type="id" />
+    <item name="tvInstructionsDetails" type="id" />
+    <item name="btnLetsCook" type="id" />
 </resources>
