@@ -1,4 +1,4 @@
-package com.example.yourapp
+package com.muhammadiyah.sukozapp.detail
 
 import android.os.Bundle
 import android.widget.Toast

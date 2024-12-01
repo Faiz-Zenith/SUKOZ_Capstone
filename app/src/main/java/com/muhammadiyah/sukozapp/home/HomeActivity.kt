@@ -27,9 +27,15 @@ class HomeActivity : AppCompatActivity() {
         val username = intent.getStringExtra("username") ?: "User"
         binding.tvHelloUser.text = "Hello, $username"
 
-        binding.ivSearchIcon.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
+        binding.btnSearch.setOnClickListener {
+            val query = binding.etSearch.text.toString()
+            if (query.isNotEmpty()) {
+                val intent = Intent(this, SearchActivity::class.java)
+                intent.putExtra("query", query)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Please enter a search term", Toast.LENGTH_SHORT).show()
+            }
         }
 
         fetchCategories()

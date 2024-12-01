@@ -14,4 +14,6 @@
     <item name="tvInstructions" type="id" />
     <item name="tvInstructionsDetails" type="id" />
     <item name="btnLetsCook" type="id" />
+    <item name="tvWhatToCookTitle" type="id" />
+    <item name="rvWhatToCook" type="id" />
 </resources>
