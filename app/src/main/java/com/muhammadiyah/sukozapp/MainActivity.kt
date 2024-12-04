@@ -2,24 +2,34 @@ package com.muhammadiyah.sukozapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
+import com.google.android.material.chip.Chip
 import com.muhammadiyah.sukozapp.databinding.ActivityMainBinding
-import com.muhammadiyah.sukozapp.category.CategoryAdapter
 import com.muhammadiyah.sukozapp.home.HomeActivity
 import com.muhammadiyah.sukozapp.model.Category
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var categoryAdapter: CategoryAdapter
     private val categories = listOf(
-        Category("1", "Masakan Sunda"),
-        Category("2", "Masakan Jawa"),
-        Category("3", "Masakan Tegal"),
-        Category("4", "Masakan Malang"),
-        Category("5", "Masakan Bandung")
+        Category("1", "Vegan"),
+        Category("2", "Vegetarian"),
+        Category("3", "Nut"),
+        Category("4", "Dairy"),
+        Category("5", "Non Dairy"),
+        Category("6", "Low Cal"),
+        Category("7", "Low Cholesterol"),
+        Category("8", "Low/No Sugar"),
+        Category("9", "Pescatarian"),
+        Category("10", "Summer"),
+        Category("11", "Fall"),
+        Category("12", "Dessert"),
+        Category("13", "22-Minute Cooking"),
+        Category("14", "Healthy"),
+        Category("15", "Easy Recipe"),
+        Category("16", "No Tree Nut"),
+        Category("17", "High Protein")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,15 +37,35 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnTakeMeToHome.visibility = View.GONE
-
-        categoryAdapter = CategoryAdapter(categories) { selectedCategories ->
-            binding.btnTakeMeToHome.visibility =
-                if (selectedCategories.isNotEmpty()) View.VISIBLE else View.GONE
+        categories.forEach { category ->
+            val chip = Chip(this).apply {
+                text = category.name
+                isCheckable = true
+                setChipBackgroundColorResource(R.color.default_chip_color)
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        setChipBackgroundColorResource(R.color.brown) // Warna coklat saat dipilih
+                    } else {
+                        setChipBackgroundColorResource(R.color.default_chip_color) // Warna default saat tidak dipilih
+                    }
+                }
+            }
+            binding.chipGroupCategories.addView(chip)
         }
 
-        binding.recyclerViewCategories.layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewCategories.adapter = categoryAdapter
+        binding.chipGroupCategories.setOnCheckedStateChangeListener { group, _ ->
+            val isEnabled = group.checkedChipIds.isNotEmpty()
+            binding.btnTakeMeToHome.isEnabled = isEnabled
+            if (isEnabled) {
+                binding.btnTakeMeToHome.setBackgroundColor(
+                    ContextCompat.getColor(this, R.color.brown)
+                )
+            } else {
+                binding.btnTakeMeToHome.setBackgroundColor(
+                    ContextCompat.getColor(this, android.R.color.darker_gray)
+                )
+            }
+        }
 
         binding.btnTakeMeToHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
