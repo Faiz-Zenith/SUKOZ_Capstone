@@ -11,7 +11,7 @@ import com.muhammadiyah.sukozapp.model.Recipe
 import com.muhammadiyah.sukozapp.adapter.RecipeAdapter
 import android.text.Editable
 import android.text.TextWatcher
-import com.muhammadiyah.sukozapp.ui.HomeActivity
+import com.muhammadiyah.sukozapp.home.HomeActivity
 
 class SearchActivity : AppCompatActivity() {
 
