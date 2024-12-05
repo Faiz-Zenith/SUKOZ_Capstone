@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.muhammadiyah.sukozapp.databinding.ActivityMainBinding
-import com.muhammadiyah.sukozapp.home.HomeActivity
 import com.muhammadiyah.sukozapp.model.Category
+import com.muhammadiyah.sukozapp.ui.HomeActivity
 
 class MainActivity : AppCompatActivity() {
 

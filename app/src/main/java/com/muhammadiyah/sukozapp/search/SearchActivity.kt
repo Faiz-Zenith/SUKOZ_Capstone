@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadiyah.sukozapp.R
 import com.muhammadiyah.sukozapp.databinding.ActivitySearchBinding
-import com.muhammadiyah.sukozapp.home.HomeActivity
 import com.muhammadiyah.sukozapp.model.Recipe
 import com.muhammadiyah.sukozapp.adapter.RecipeAdapter
 import android.text.Editable
 import android.text.TextWatcher
+import com.muhammadiyah.sukozapp.ui.HomeActivity
 
 class SearchActivity : AppCompatActivity() {
 
@@ -24,7 +24,9 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recipeAdapter = RecipeAdapter(emptyList())
+        recipeAdapter = RecipeAdapter(emptyList<Recipe>()) { recipe ->
+            Toast.makeText(this, "Clicked on: ${recipe.name}", Toast.LENGTH_SHORT).show()
+        }
         binding.rvSearchResults.layoutManager = LinearLayoutManager(this)
         binding.rvSearchResults.adapter = recipeAdapter
 
@@ -67,9 +69,9 @@ class SearchActivity : AppCompatActivity() {
 
     private fun searchFood(query: String) {
         val results = listOf(
-            Recipe("Nasi Goreng"),
-            Recipe("Sate Ayam"),
-            Recipe("Gado-Gado")
+            Recipe(id = 1, name = "Nasi Goreng", category = "Indonesian", imageUrl = ""),
+            Recipe(id = 2, name = "Sate Ayam", category = "Indonesian", imageUrl = ""),
+            Recipe(id = 3, name = "Gado-Gado", category = "Vegetarian", imageUrl = "")
         )
 
         recipeAdapter.updateData(results)
