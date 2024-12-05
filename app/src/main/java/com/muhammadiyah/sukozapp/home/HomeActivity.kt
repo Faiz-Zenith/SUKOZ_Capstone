@@ -1,18 +1,15 @@
-package com.muhammadiyah.sukozapp.home
+package com.muhammadiyah.sukozapp.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammadiyah.sukozapp.R
-import com.muhammadiyah.sukozapp.api.ApiClient
-import com.muhammadiyah.sukozapp.category.CategoryAdapter
+import com.muhammadiyah.sukozapp.adapter.RecipeAdapter
+import com.muhammadiyah.sukozapp.bookmark.BookmarkActivity
 import com.muhammadiyah.sukozapp.databinding.ActivityHomeBinding
-import com.muhammadiyah.sukozapp.model.Category
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.content.Intent
+import com.muhammadiyah.sukozapp.detail.DetailActivity
+import com.muhammadiyah.sukozapp.model.Recipe
 import com.muhammadiyah.sukozapp.search.SearchActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -24,55 +21,77 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("username") ?: "User"
-        binding.tvHelloUser.text = "Hello, $username"
+        setupGreeting()
+        setupSearchBar()
+        setupWhatToCook()
+        setupCookAgain()
+        setupBottomNavigation()
+    }
 
+    private fun setupGreeting() {
+        val userName = "User"
+        binding.tvHelloUser.text = "Hello, $userName"
+    }
+
+    private fun setupSearchBar() {
         binding.btnSearch.setOnClickListener {
-            val query = binding.etSearch.text.toString()
+            val query = binding.etSearch.text.toString().trim()
             if (query.isNotEmpty()) {
                 val intent = Intent(this, SearchActivity::class.java)
-                intent.putExtra("query", query)
+                intent.putExtra("search_query", query)
                 startActivity(intent)
-            } else {
-                Toast.makeText(this, "Please enter a search term", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        fetchCategories()
+    private fun setupWhatToCook() {
+        val recipes = listOf(
+            Recipe(1, "Spaghetti Carbonara", "Main Dish", "https://via.placeholder.com/150"),
+            Recipe(2, "Caesar Salad", "Appetizer", "https://via.placeholder.com/150"),
+            Recipe(3, "Chocolate Cake", "Dessert", "https://via.placeholder.com/150")
+        )
 
-        binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_home -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
+        val adapter = RecipeAdapter(recipes) { selectedRecipe ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("recipe_id", selectedRecipe.id)
+            startActivity(intent)
+        }
+
+        binding.rvWhatToCook.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvWhatToCook.adapter = adapter
+    }
+
+    private fun setupCookAgain() {
+        val recipes = listOf(
+            Recipe(4, "Beef Steak", "Main Dish", "https://via.placeholder.com/150"),
+            Recipe(5, "Chicken Curry", "Main Dish", "https://via.placeholder.com/150"),
+            Recipe(6, "Fruit Salad", "Dessert", "https://via.placeholder.com/150")
+        )
+
+        val adapter = RecipeAdapter(recipes) { selectedRecipe ->
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("recipe_id", selectedRecipe.id)
+            startActivity(intent)
+        }
+
+        // Konfigurasi RecyclerView
+        binding.rvCookAgain.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvCookAgain.adapter = adapter
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_home -> {
+                    true
+                }
                 R.id.menu_bookmark -> {
+                    val intent = Intent(this, BookmarkActivity::class.java)
+                    startActivity(intent)
+                    true
                 }
+                else -> false
             }
-            true
-        }
-    }
-
-    private fun fetchCategories() {
-        ApiClient.instance.getCategories().enqueue(object : Callback<List<Category>> {
-            override fun onResponse(
-                call: Call<List<Category>>,
-                response: Response<List<Category>>
-            ) {
-                if (response.isSuccessful) {
-                    val categories = response.body() ?: emptyList()
-                    setupCategories(categories)
-                } else {
-                    Toast.makeText(this@HomeActivity, "Failed to load categories", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<Category>>, t: Throwable) {
-                Toast.makeText(this@HomeActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    private fun setupCategories(categories: List<Category>) {
-        binding.rvWhatToCook.layoutManager = LinearLayoutManager(this)
-        binding.rvWhatToCook.adapter = CategoryAdapter(categories) { selectedCategories ->
         }
     }
 }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.HomeActivity">
+    tools:context=".ui.HomeActivity">
 
     <TextView
         android:id="@+id/tvHelloUser"
@@ -75,7 +75,7 @@
         android:id="@+id/tvWhatToCookTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What to cook"
+        android:text="Suggestions"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
@@ -83,6 +83,17 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/cardSearchBar"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvWhatToCookSeeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See All"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tvWhatToCookTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWhatToCook"
@@ -97,7 +108,7 @@
         android:id="@+id/tvCookAgainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cook again"
+        android:text="Based on your history"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
@@ -105,6 +116,17 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/rvWhatToCook"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCookAgainSeeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See All"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tvCookAgainTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCookAgain"

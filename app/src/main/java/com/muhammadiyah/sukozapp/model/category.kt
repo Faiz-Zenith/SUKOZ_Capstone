@@ -6,5 +6,8 @@ data class Category(
 )
 
 data class Recipe(
-    val name: String
+    val id: Int,
+    val name: String,
+    val category: String,
+    val imageUrl: String
 )

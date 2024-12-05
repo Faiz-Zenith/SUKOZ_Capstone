@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
                 setChipBackgroundColorResource(R.color.default_chip_color)
                 setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked) {
-                        setChipBackgroundColorResource(R.color.brown) // Warna coklat saat dipilih
+                        setChipBackgroundColorResource(R.color.brown)
                     } else {
-                        setChipBackgroundColorResource(R.color.default_chip_color) // Warna default saat tidak dipilih
+                        setChipBackgroundColorResource(R.color.default_chip_color)
                     }
                 }
             }
