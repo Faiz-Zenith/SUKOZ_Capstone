@@ -1,4 +1,4 @@
-package com.muhammadiyah.sukozapp.ui
+package com.muhammadiyah.sukozapp.home
 
 import android.content.Intent
 import android.os.Bundle
